@@ -1,43 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stddef.h>
 
-int main()
+void print_initial_values(int x, int y, int *px, int *py)
 {
-    int x = 0;
-    int y = 1;
+    printf("Initial values:\n");
+    printf("x = %d, y = %d, *px = %d, *py = %d\n", x, y, *px, *py);
+}
 
-    int *px = &x;
-    int *py = &y;
+void print_current_values(int x, int y, int *px, int *py)
+{
+    printf("Current values: x = %d, y = %d, *px = %d, *py = %d\n", x, y, *px, *py);
+}
 
-    printf("%d %d %d %d\n", x, y, *px, *py);
+void print_memory_info(int *px, int *py, int x, int y)
+{
+    printf("Addresses:\n");
+    printf("Address of x: %16p\n", (void *)&x);
+    printf("Address of y: %16p\n", (void *)&y);
+    printf("Address of px: %16p\n", (void *)&px);
+    printf("Address of py: %16p\n", (void *)&py);
+}
 
-    printf("Please enter a number: ");
-    scanf("%d", px);
-
-    printf("%d %d %d %d\n", x, y, *px, *py);
-
-    printf("Please enter a number: ");
-    scanf("%d", py);
-
-    printf("%d %d %d %d\n", x, y, *px, *py);
-
-    printf("%d %d", x + y, *px + *py);
-
-    printf("\nAddress of x: %p\n", (void *)&x);
-    printf("Address of y: %p\n", (void *)&y);
-    printf("Address of px: %p\n", (void *)&px);
-    printf("Address of py: %p\n", (void *)&py);
-
+void print_size_info(int x, int y, int *px, int *py)
+{
+    printf("Sizes:\n");
     printf("Size of x: %lu bytes\n", sizeof(x));
     printf("Size of y: %lu bytes\n", sizeof(y));
     printf("Size of px: %lu bytes\n", sizeof(px));
     printf("Size of py: %lu bytes\n", sizeof(py));
+}
 
-    printf("Value of x: %d\n", x);
-    printf("Value of y: %d\n", y);
-    printf("Value of px: %d\n", *px);
-    printf("Value of py: %d\n", *py);
+int main()
+{
+    int x = 0, y = 1;
+    int *px = &x, *py = &y;
+
+    print_initial_values(x, y, px, py);
+
+    printf("Enter a number for x: ");
+    scanf("%d", px); // Store user input in x via pointer px
+
+    printf("Enter a number for y: ");
+    scanf("%d", py); // Store user input in y via pointer py
+
+    print_current_values(x, y, px, py);
+    printf("Sum of x + y = %d\n", x + y);
+    printf("Sum of *px + *py = %d\n", *px + *py);
+
+    print_memory_info(px, py, x, y);
+    print_size_info(x, y, px, py);
 
     return 0;
 }
