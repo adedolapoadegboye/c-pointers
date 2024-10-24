@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
 
 int main()
 {
@@ -20,6 +21,8 @@ int main()
     scanf("%d", py);
 
     printf("%d %d %d %d\n", x, y, *px, *py);
+
+    printf("%d %d", x + y, *px + *py);
 
     return 0;
 }
