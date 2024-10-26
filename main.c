@@ -34,6 +34,12 @@ int main()
 {
     int x = 0, y = 1;
     int *px = &x, *py = &y;
+    const int *ppx = px; // Pointer to pointer to x. Value of x can not be changed using this pointer
+    int const *ppy = py; // Pointer to pointer to y. Address pointed to (py) can not be changed using this pointer
+
+    // *ppx = 10; // Expects compiler error
+    int z = 10;
+    ppy = &z; // Expects compiler error
 
     print_initial_values(x, y, px, py);
 
@@ -49,6 +55,8 @@ int main()
 
     print_memory_info(px, py, x, y);
     print_size_info(x, y, px, py);
+
+    printf("%i\n", ppy);
 
     return 0;
 }
