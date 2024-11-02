@@ -21,6 +21,7 @@ size_t stringLength2(const char *str)
     const char *end = NULL; // Initialize the end pointer
     while (*str != '\0')    // Check the character, not the pointer
     {
+        printf("\n%c -----> %p -----> %zu", *str, (void *)end, sizeof(end));
         end = ++str;
     }
     printf("\n%p", (void *)end);
