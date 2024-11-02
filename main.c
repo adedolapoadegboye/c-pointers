@@ -1,42 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stddef.h>
-
-size_t stringLength(const char *str)
-{
-    size_t length = 0;
-    while (str[length] != '\0')
-    {
-        printf("\n%c -----> %zu", str[length], length); // Use %zu for size_t
-        length++;
-    }
-    return length;
-}
-
-size_t stringLength2(const char *str)
-{
-    const char *start = str; // Save the starting pointer
-    printf("\n%p", (void *)start);
-    const char *end = NULL; // Initialize the end pointer
-    while (*str != '\0')    // Check the character, not the pointer
-    {
-        printf("\n%c -----> %p -----> %zu", *str, (void *)end, sizeof(end));
-        end = ++str;
-    }
-    printf("\n%p", (void *)end);
-    return end - start; // Returns as size_t
-}
 
 int main()
 {
     char string[100];
-    char *pstring = &string[0];
+    printf("Enter a string (max 99 characters): ");
+    scanf("%99s", string); // Prevent buffer overflow
 
-    printf("Enter a string: ");
-    scanf("%99s", pstring); // Limit input to prevent overflow
+    printf("\nYou entered: %s\n", string);
 
-    printf("\nThe length of %s is %zu\n", pstring, stringLength(pstring));  // Use %zu
-    printf("\nThe length of %s is %zu\n", pstring, stringLength2(pstring)); // Use %zu
+    char *text = NULL;
+    unsigned long var = 0;
+
+    printf("Enter a word length (max 99): ");
+    scanf("%lu", &var);
+
+    if (var >= 100)
+    {
+        printf("Word length too large. Limit to 99.\n");
+        return 1;
+    }
+
+    text = (char *)malloc((var + 1) * sizeof(char)); // +1 for the null terminator
+
+    if (!text)
+    {
+        printf("Memory not allocated.\n");
+        return 1;
+    }
+
+    printf("Enter the word: ");
+    scanf("%99s", text); // Limit input size
+
+    printf("The word is: %s\n", text);
+
+    free(text); // Free allocated memory
     return 0;
 }
