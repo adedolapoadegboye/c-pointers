@@ -2,63 +2,38 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct items
+{
+    char itemName[10];
+    int quantity;
+    float price;
+    float amount;
+};
+
+int readItem(struct items *item)
+{
+    printf("Enter item name: ");
+    scanf("%s", item->itemName);
+    printf("Enter quantity: ");
+    scanf("%d", &item->quantity);
+    printf("Enter price: ");
+    scanf("%f", &item->price);
+    item->amount = item->quantity * item->price;
+    return 0;
+}
+
+int printItem(struct items *item)
+{
+    printf("Item name is %s", item->itemName);
+    printf("Item quantity is %i", item->quantity);
+    printf("Item price is %f", item->price);
+    printf("Item amount is %f", item->amount);
+    return 0;
+}
+
 int main()
 {
-    char string[100];
-    printf("Enter a string (max 99 characters): ");
-    scanf("%99s", string); // Prevent buffer overflow
-
-    printf("\nYou entered: %s\n", string);
-
-    char *text = NULL;
-    unsigned long var = 0;
-
-    printf("Enter a word length (max 99): ");
-    scanf("%lu", &var);
-
-    if (var >= 100)
-    {
-        printf("Word length too large. Limit to 99.\n");
-        return 1;
-    }
-
-    text = (char *)malloc((var + 1) * sizeof(char)); // +1 for the null terminator
-
-    if (!text)
-    {
-        printf("Memory not allocated.\n");
-        return 1;
-    }
-
-    printf("Enter the word: ");
-    scanf("%99s", text); // Limit input size
-
-    printf("The word is: %s\n", text);
-
-    free(text); // Free allocated memory
-
-    struct employee
-    {
-        char name[100];
-        int hireDate;
-        float salary;
-    };
-
-    struct employee Ade;
-
-    printf("Enter employee name: ");
-    scanf("%99s", Ade.name);
-
-    printf("Enter employee hire date: ");
-    scanf("%d", &Ade.hireDate);
-
-    printf("Enter employee salary: ");
-    scanf("%f", &Ade.salary);
-
-    printf("Employee details:\n");
-    printf("Name: %s\n", Ade.name);
-    printf("Hire Date: %d\n", Ade.hireDate);
-    printf("Salary: %.2f\n", Ade.salary);
-
-    return 0;
+    struct items example, *pexample = &example;
+    readItem(pexample);
+    printItem(pexample);
 }
