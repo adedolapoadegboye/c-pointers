@@ -36,5 +36,29 @@ int main()
     printf("The word is: %s\n", text);
 
     free(text); // Free allocated memory
+
+    struct employee
+    {
+        char name[100];
+        int hireDate;
+        float salary;
+    };
+
+    struct employee Ade;
+
+    printf("Enter employee name: ");
+    scanf("%99s", Ade.name);
+
+    printf("Enter employee hire date: ");
+    scanf("%d", &Ade.hireDate);
+
+    printf("Enter employee salary: ");
+    scanf("%f", &Ade.salary);
+
+    printf("Employee details:\n");
+    printf("Name: %s\n", Ade.name);
+    printf("Hire Date: %d\n", Ade.hireDate);
+    printf("Salary: %.2f\n", Ade.salary);
+
     return 0;
 }
