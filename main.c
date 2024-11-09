@@ -2,40 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct items
-{
-    char *itemName;
-    int quantity;
-    float price;
-    float amount;
-};
-
-int readItem(struct items *item)
-{
-    printf("Enter item name: ");
-    scanf("%s", item->itemName);
-    printf("Enter quantity: ");
-    scanf("%d", &item->quantity);
-    printf("Enter price: ");
-    scanf("%f", &item->price);
-    item->amount = item->quantity * item->price;
-    return 0;
-}
-
-int printItem(struct items *item)
-{
-    printf("\nItem name is %s", item->itemName);
-    printf("\nItem quantity is %i", item->quantity);
-    printf("\nItem price is %f", item->price);
-    printf("\nItem amount is %f", item->amount);
-    return 0;
-}
-
 int main()
 {
-    struct items example, *pexample = &example;
-    pexample->itemName = (char *)malloc(10 * sizeof(char));
-    readItem(pexample);
-    printItem(pexample);
-    free(example.itemName);
+    FILE *filer = NULL;
+
+    filer = fopen("file.txt", "r");
+    if (filer != NULL)
+    {
+        printf("\nFile successfully opened!\n");
+
+        int reader;
+        int counter = 0;
+        while ((reader = fgetc(filer)) != EOF)
+        {
+
+            printf("Character --> %c\n", reader);
+            if (reader == 10)
+            {
+                counter++;
+            }
+        }
+        rewind(filer);
+        printf("\nThe number of lines in the file is %i\n", counter);
+        fclose(filer);
+        filer = NULL;
+        return counter;
+    }
+    else
+    {
+        printf("File not found!");
+        perror("Error in opening file");
+        return -1;
+    }
 }
